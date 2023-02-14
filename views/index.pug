@@ -1,0 +1,28 @@
+html
+  head
+    title= title
+    style 
+      include style1.css
+      include style2.css
+    
+  body
+    div(class='flex flex-row h-screen')
+      div(class="h-full basis-3/25 flex flex-col bg-[#FF5841] w-40 max-h-screen")
+          a(class="border-solid border-black pl-4 pt-4 font-sans hover:font-serif text-xl pr-8 font-medium hover:font-bold" href='#me' onclick="onClickMe()" title="About Me!") About Me
+          br
+          a(class="border-solid border-black pl-4 pt-4 font-sans hover:font-serif text-xl pr-8 font-medium hover:font-bold" href='#experience' onclick="onClickExperience()" title ="Experience") Experience
+          br
+          a(class="border-solid border-black pl-4 pt-4 font-sans hover:font-serif text-xl pr-8 font-medium hover:font-bold" href='#projects' onclick="onClickProjects()" title="Projects") Projects
+          br
+          a(class="border-solid border-black pl-4 pt-4 font-sans hover:font-serif text-xl pr-8 font-medium hover:font-bold" href='#skills' onclick="onClickSkills()" title="Skills") Skills
+          br
+          a(class="border-solid border-black pl-4 pt-4 font-sans hover:font-serif text-xl pr-8 font-medium hover:font-bold" href='#certification' onclick="onClickCertifications()" title="Certifications") Certifications
+          br
+          a(class="border-solid border-black pl-4 pt-4 font-sans hover:font-serif text-xl pr-8 font-medium hover:font-bold" href='#education' onclick="onClickEducation()" title="Education") Education
+          br
+
+      div(class="basis-22/25  max-h-screen bg-[#bfdbfe] w-screen" id="main")
+          p(class="pl-4 pr-4 pt-4 w-full" id="p") I am an Assistant System Engineer in TCS working on maintaining and developing the dashboard for an automation project. I have experience in Nodejs, Reactjs looking for an opportunity which challenges my skills, where I get to innovate efficient and effective solutions for highly scalable mission-critical web applications. 
+
+    script 
+        include script.js
