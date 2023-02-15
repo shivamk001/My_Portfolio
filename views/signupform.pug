@@ -1,0 +1,42 @@
+html 
+    head 
+        title= title 
+        style 
+            include style1.css 
+            include style2.css 
+
+    body
+        div(class="div-center")
+            form(action='/signupform', method='POST')
+                div 
+                    h1 Sign Up 
+                    p Fill the Form to SignUp
+                    if error
+                        h3= error
+                    hr
+                    label(for="username") Enter UserName
+                    br
+                    input(type="text" placeholder="Enter Username" name="username" required)
+                    br
+                    label(for="firstname") Enter FirstName
+                    br
+                    input(type="text" placeholder="Enter Firstname" name="firstname" required)
+                    br
+                    label(for="lastname") Enter LastName
+                    br
+                    input(type="text" placeholder="Enter Lastname" name="lastname" required)
+                    br
+                    label(for="email") Enter Email
+                    br
+                    input(type="text" placeholder="Enter Email" name="email" required)
+                    br
+                    label(for="password") Enter Password
+                    br
+                    input(type="password" placeholder="Enter Password" name="password" required)
+                    br
+                    label(for="confirmpassword") Re-enter Password
+                    br
+                    input(type="password" placeholder="Enter Password" name="confirmpassword" required)
+
+                div 
+                    button(type="submit") Signup 

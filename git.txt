@@ -1,0 +1,23 @@
+#push an existing repository from the command line
+git remote add origin https://github.com/shivamk001/My_Portfolio.git
+
+#create new branch
+git checkout -b <new_branch>
+
+#push to branch named 'origin'
+git push origin origin
+
+
+#create a .gitignore file
+#commit 
+git commit -m "First Commit"
+#
+git rm -r --cached
+#add all files not mentioned in .gitignore files
+git add .
+#commit
+git commit -m "First Commit"
+#switch to origin branch
+git checkout -b origin
+#push to origin branch
+git push origin origin

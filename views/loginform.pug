@@ -1,0 +1,25 @@
+html 
+    head 
+        title= title 
+        style 
+            include style1.css 
+            include style2.css 
+
+    body
+        div(class="div-center")
+            form(action='/loginform', method='POST' class="form-center")
+                div 
+                    h1 Login
+                    p Fill the Form 
+                    hr
+
+                    label(for="email") Enter Email
+                    br
+                    input(type="text" placeholder="Enter Email" name="email" required)
+                    br
+                    label(for="password") Enter Password
+                    br
+                    input(type="text" placeholder="Enter Password" name="password" required)
+
+                div 
+                    button(type="submit") Signup 
