@@ -2,25 +2,30 @@ html
     head 
         title= title 
         style 
-            include style1.css 
-            include style2.css 
+            include style1.css
+            include style2.css
+            include ./assets/css/bootstrap.min.css 
+            include ./assets/css/custom.css
+        
+        script 
+            include ./assets/js/jquery.min.js
+            include ./assets/js/popper.min.js
+            include ./assets/js/tooltip.min.js
+            include ./assets/js/bootstrap.min.js
+            include ./assets/js/custom.js
+            include script.js
 
     body
         div(class="div-center")
             form(action='/loginform', method='POST' class="form-center")
-                div 
-                    h1 Login
-                    p Fill the Form 
-                    hr
+                h4 Login
+                label Please fill the Form to Login
                     //if error
                     //    h3= error
-                    label(for="email") Enter Email
-                    br
-                    input(type="text" placeholder="Enter Email" name="email" required)
-                    br
+                div(class="form-group")
+                    label(for="email") Enter Email:
+                    input(type="text" class="form-control" placeholder="Enter Email" name="email" required)
+                div(class="form-group")
                     label(for="password") Enter Password
-                    br
-                    input(type="password" placeholder="Enter Password" name="password" required)
-
-                div 
-                    button(type="submit") Signup 
+                    input(type="password" class="form-control"  placeholder="Enter Password" name="password" required)
+                button(type="submit" class="btn btn-default") Login 
