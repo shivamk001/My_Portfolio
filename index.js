@@ -1,12 +1,12 @@
-const express=require('express')
+import express from 'express'
 const app=express()
-const bodyParser=require('body-parser')
-const path = require('path')
-require('dotenv').config()
-
+import bodyParser from 'body-parser'
+import path from 'path'
+import dotenv from 'dotenv'
+dotenv.config()
 
 //connect with MongoDB
-const connectDB=require('./models/db.js')
+import connectDB from './models/db.js'
 connectDB()
 
 
@@ -19,16 +19,20 @@ app.use(bodyParser.json())
 //npm i pug
 app.set('view engine', 'pug')
 app.set('views', 'views')
+//after es6 import
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, 'public')))
 
 
 
 
 //login and signup
-const {loginForm, signupForm}=require('./controllers/userControllers.js')
+import {loginForm, signupForm} from './controllers/userControllers.js'
 //login
 app.get('/login', function(req, res, next){res.render('loginform')})
-app.post('/loginform', (req,res,next)=>{loginForm(req, res, next)})
+app.post('/loginform', (req,res,next)=>{loginForm(req, res, next)}, (req, res, next)=>{console.log("USERL:", res.header.userName)})
 //signup
 app.get('/signup', function(req, res, next){res.render('signupform')})
 //the method must be post to get the req.body data
@@ -36,11 +40,16 @@ app.post('/signupform', (req,res, next)=>{signupForm(req, res, next)})
 
 
 //display homepage
-const {portFolio}=require('./controllers/portfolioController.js')
+import {portFolio, educationForm} from './controllers/portfolioController.js'
+app.post('/educationform', (req,res,next)=>{educationForm(req, res, next)})
 app.get('/:userName', (req,res, next)=>{portFolio(req, res, next)})
 
+//delete data
+import { deleteEducation } from './controllers/portfolioController.js'
+app.delete('/delete', (req,res,next)=>{deleteEducation(req, res, next)})
+
 //error handler
-const errorHandler=require('./utils/errorHandler.js')
+import errorHandler from './utils/errorHandler.js'
 app.use((err, req, res, next)=>{errorHandler(err, req, res, next)})
 
 app.listen(process.env.PORT, (err)=>{

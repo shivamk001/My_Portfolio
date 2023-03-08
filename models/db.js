@@ -1,7 +1,7 @@
-const mongoose=require('mongoose')
-const colors=require('colors')
+import mongoose from 'mongoose'
+import colors from 'colors'
 //require('dotenv').config()
-module.exports=async()=>{
+export default async()=>{
     try{
         console.log(`MONGO-URI: ${process.env.MONGO_URI}`.green)
         const conn=await mongoose.connect(process.env.MONGO_URI,{

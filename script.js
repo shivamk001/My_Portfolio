@@ -1,4 +1,17 @@
 console.log('You are awesome');
+async function makeRequest(url, method, headers, data){
+    const response= await fetch(url, {
+        method: method,
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: headers,
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+    })
+    return response.json()
+}
 
 function onClickMe(){
     const parentDiv=document.getElementById('main')
@@ -101,4 +114,41 @@ function onClickEducation(){
     p.className="pl-4 pr-4 pt-4 w-full"
     p.innerHTML=`BTECH CSE, IERT ALLAHABAD, AFFILIATED TO AKTU, LUCKNOW `
     children[0].replaceWith(p)
+}
+
+//import {Education} from '../models/educationModel.js'
+//import Education from '../models/educationModel.js'
+//const Education=require('../models/educationModel.js')
+async function onClickDeleteEducation(index, val){
+    console.log("onClickDeleteEducation:", index)
+    //parent element
+    const parentTable=document.getElementById('educationbody')
+    //children element
+    const children=parentTable.children
+    console.log('CHILDREN:', children)
+    //get id of the table row
+    const row=document.getElementById(index)
+    //get th in row
+    const rowchildren=row.children
+    const userid= val.userId
+    console.log(`USERID: ${userid}`)
+    const institute=rowchildren[0].innerHTML
+    const degree=rowchildren[1].innerHTML
+    const yop=rowchildren[2].innerHTML
+    //remove the table row from the table
+    row.replaceWith()
+    //delete the document from the collection
+    var headers={
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    var data={
+        userid: userid,
+        institute: institute,
+        degree: degree,
+        yearOfPassing: yop
+    }
+    const deleteResponse=await makeRequest('http://localhost:3000/delete', 'DELETE', headers, data)
+    console.log('DELETED:', deleteResponse)
+
 }

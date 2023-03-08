@@ -1,4 +1,4 @@
-const mongoose=require('mongoose')
+import mongoose from 'mongoose'
 
 const userSchema=mongoose.Schema({
     userId: {type: mongoose.Schema.Types.ObjectId},
@@ -12,5 +12,5 @@ const userSchema=mongoose.Schema({
     password: {type: String}
 })
 
-const User=mongoose.model('User', userSchema)
-module.exports={User}
+export default mongoose.model('User', userSchema)
+//module.exports={User}

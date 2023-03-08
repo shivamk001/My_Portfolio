@@ -1,6 +1,7 @@
-const {User}=require('../models/userModel.js')
-const jwt=require("jsonwebtoken")
-const bcrypt=require('bcrypt')
+import User from '../models/userModel.js'
+import Education from '../models/educationModel.js' 
+import jwt from "jsonwebtoken"
+import bcrypt from 'bcrypt'
 
 function signJWT(data){
     console.log('IN SIGNJWT:', data)
@@ -17,7 +18,9 @@ async function loginForm(req, res, next){
     //get user details
     const {email, password}=req.body
     const userExists=await User.findOne({userEmail: email})
+    const userId=userExists._id
     console.log('USEREXISTS in LOGIN:', userExists)
+    console.log('USEREXISTS in LOGIN:',userId)
     if(!userExists){
         var err=new Error('User does not exist.')
         err.status=404
@@ -36,19 +39,23 @@ async function loginForm(req, res, next){
     }
     else{
         //get jwt from response header
-        const jwttoken=req.headers.authorization.split(" ")[1]
-        console.log('JWTTOKEN:', jwttoken)
-        //verify jwt
-        console.log('VERIFYJWT in LOGIN:',verifyJWT(jwttoken))
-        if(verifyJWT(jwttoken)){
-            res.render('successful', {message: 'Login Successful!'})
-        }
-        else{
-            var err=new Error('Unauthorized Error. Login Again')
-            err.status=401
-            next(err)
-            //res.render('login', {'error':'Password Incorrect.'})
-        }
+        res.setHeader('userName', userExists.userName)
+        const allEducation=await Education.find({userId: userId})
+        console.log('ALLEDUCATION:', allEducation)
+        res.render('successful', {message: 'Login Successful!', userName: userExists.userName, allEducation: allEducation})
+        // const jwttoken=req.headers.authorization.split(" ")[1]
+        // console.log('JWTTOKEN:', jwttoken)
+        // //verify jwt
+        // console.log('VERIFYJWT in LOGIN:',verifyJWT(jwttoken))
+        // if(verifyJWT(jwttoken)){
+        //     res.render('successful', {message: 'Login Successful!'})
+        // }
+        // else{
+        //     var err=new Error('Unauthorized Error. Login Again')
+        //     err.status=401
+        //     next(err)
+        //     //res.render('login', {'error':'Password Incorrect.'})
+        // }
     }
     
 }
@@ -108,4 +115,4 @@ async function signupForm(req, res, next){
         
 }
 
-module.exports={loginForm, signupForm}
+export {loginForm, signupForm}

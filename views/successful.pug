@@ -4,6 +4,259 @@ html
     style 
       include style1.css
       include style2.css
+      include ./assets/css/bootstrap.min.css 
+      include ./assets/css/custom.css
+    
+    script 
+      include ./assets/js/jquery.min.js
+      include ./assets/js/popper.min.js
+      include ./assets/js/tooltip.min.js
+      include ./assets/js/bootstrap.min.js
+      include ./assets/js/custom.js
+      include ../script.js
     
   body
-    p= message
+    nav(class="nav nav-tabs justify-content-center" style="background-color: #e3f2fd;")
+      //-a(class="nav-link") Portfolio
+      a(class="nav-link active" id="experience-tab" onclick="" data-bs-toggle="tab" data-bs-target="#experience" type="button" role="tab" aria-controls="experience" aria-selected="true") Experience
+      a(class="nav-link" id="education-tab"  data-bs-toggle="tab" data-bs-target="#education" type="button" role="tab" aria-controls="education" aria-selected="false") Education
+      a(class="nav-link" id="certifications-tab" onclick="" data-bs-toggle="tab" data-bs-target="#certifications" type="button" role="tab" aria-controls="certifications" aria-selected="false") Certifications
+      a(class="nav-link" id="skills-tab" onclick="" data-bs-toggle="tab" data-bs-target="#skills" type="button" role="tab" aria-controls="skills" aria-selected="false") Skills
+      a(class="nav-link" id="projects-tab" onclick="" data-bs-toggle="tab" data-bs-target="#projects" type="button" role="tab" aria-controls="projects" aria-selected="false") Projects
+    div(class="tab-content" id="myTabContent")
+      div(class="tab-pane fade show active" id="experience" role="tabpanel" aria-labelledby="experience-tab")
+        div(id="ed")
+          div(class="container")
+            h3(class="text-center") MY EXPERIENCE DETAILS
+            table(class="table" id="educationtable")
+              thead
+                tr
+                  th INSTITUTE 
+                  th DEGREE 
+                  th YEAR OF PASSING
+                  th EDIT 
+                  th DELETE
+              tbody(id="educationbody")
+                each val, index in allEducation
+                  tr(id=`${index}`)
+                    th(class="fw-normal")= val.institute 
+                    th(class="fw-normal")= val.degree 
+                    th(class="fw-normal")= val.yearOfPassing 
+                    th(class="fw-normal") 
+                      button(type="submit" class="btn btn-primary" onclick="") Edit
+                    th(class="fw-normal")
+                      //-form(action='/delete', method='POST')
+                      button(type="submit" class="btn btn-danger" value=index onclick=`onClickDeleteEducation(${index}, ${JSON.stringify(val)})`) Delete
+                          //-
+          div(class="container")
+            div(class="jumbotron jumbotron-fluid")
+              div(class="alert alert-success")
+                h4= userName
+                p= message
+            h3(class="text-center") ADD MORE EXPERIENCE DETAILS
+            form(action='/educationform', method='POST')
+              fieldset
+                div(class="mb-3")
+                  label(for="username" class="form-label") UserName
+                  input(type="text" class="form-control" id="username" name="username" value=userName required)
+                div(class="mb-3")
+                  label(for="institute" class="form-label") Institute
+                  input(type="text" class="form-control" id="institute" name="institute" required)
+                div(class="mb-3")
+                  label(for="degree" class="form-label") Degree
+                  input(type="text" class="form-control" id="degree" name="degree" required)
+                div(class="mb-3")
+                  label(for="yearOfPassing" class="form-label") Year Of Passing
+                  input(type="text" class="form-control" id="yearOfPassing" name="yearOfPassing" required)
+                button(type="submit" class="btn btn-primary") Submit  
+            //- div(class="container")
+            //-   p Experience
+      div(class="tab-pane fade show active" id="education" role="tabpanel" aria-labelledby="education-tab")
+        div(id="ed")
+          div(class="container")
+            h3(class="text-center") MY EDUCATION DETAILS
+            table(class="table" id="educationtable")
+              thead
+                tr
+                  th INSTITUTE 
+                  th DEGREE 
+                  th YEAR OF PASSING
+                  th EDIT 
+                  th DELETE
+              tbody(id="educationbody")
+                each val, index in allEducation
+                  tr(id=`${index}`)
+                    th(class="fw-normal")= val.institute 
+                    th(class="fw-normal")= val.degree 
+                    th(class="fw-normal")= val.yearOfPassing 
+                    th(class="fw-normal") 
+                      button(type="submit" class="btn btn-primary" onclick="") Edit
+                    th(class="fw-normal")
+                      //-form(action='/delete', method='POST')
+                      button(type="submit" class="btn btn-danger" value=index onclick=`onClickDeleteEducation(${index}, ${JSON.stringify(val)})`) Delete
+                          //-
+          div(class="container")
+            div(class="jumbotron jumbotron-fluid")
+              div(class="alert alert-success")
+                h4= userName
+                p= message
+            h3(class="text-center") ADD MORE EDUCATION DETAILS
+            form(action='/educationform', method='POST')
+              fieldset
+                div(class="mb-3")
+                  label(for="username" class="form-label") UserName
+                  input(type="text" class="form-control" id="username" name="username" value=userName required)
+                div(class="mb-3")
+                  label(for="institute" class="form-label") Institute
+                  input(type="text" class="form-control" id="institute" name="institute" required)
+                div(class="mb-3")
+                  label(for="degree" class="form-label") Degree
+                  input(type="text" class="form-control" id="degree" name="degree" required)
+                div(class="mb-3")
+                  label(for="yearOfPassing" class="form-label") Year Of Passing
+                  input(type="text" class="form-control" id="yearOfPassing" name="yearOfPassing" required)
+                button(type="submit" class="btn btn-primary") Submit  
+            //- div(class="container")
+            //-   p Experience
+      div(class="tab-pane fade show active" id="certifications" role="tabpanel" aria-labelledby="certifications-tab")
+        div(id="ed")
+          div(class="container")
+            h3(class="text-center") MY CERTIFICATIONS DETAILS
+            table(class="table" id="educationtable")
+              thead
+                tr
+                  th INSTITUTE 
+                  th DEGREE 
+                  th YEAR OF PASSING
+                  th EDIT 
+                  th DELETE
+              tbody(id="educationbody")
+                each val, index in allEducation
+                  tr(id=`${index}`)
+                    th(class="fw-normal")= val.institute 
+                    th(class="fw-normal")= val.degree 
+                    th(class="fw-normal")= val.yearOfPassing 
+                    th(class="fw-normal") 
+                      button(type="submit" class="btn btn-primary" onclick="") Edit
+                    th(class="fw-normal")
+                      //-form(action='/delete', method='POST')
+                      button(type="submit" class="btn btn-danger" value=index onclick=`onClickDeleteEducation(${index}, ${JSON.stringify(val)})`) Delete
+                          //-
+          div(class="container")
+            div(class="jumbotron jumbotron-fluid")
+              div(class="alert alert-success")
+                h4= userName
+                p= message
+            h3(class="text-center") ADD MORE CERTIFICATIONS DETAILS
+            form(action='/educationform', method='POST')
+              fieldset
+                div(class="mb-3")
+                  label(for="username" class="form-label") UserName
+                  input(type="text" class="form-control" id="username" name="username" value=userName required)
+                div(class="mb-3")
+                  label(for="institute" class="form-label") Institute
+                  input(type="text" class="form-control" id="institute" name="institute" required)
+                div(class="mb-3")
+                  label(for="degree" class="form-label") Degree
+                  input(type="text" class="form-control" id="degree" name="degree" required)
+                div(class="mb-3")
+                  label(for="yearOfPassing" class="form-label") Year Of Passing
+                  input(type="text" class="form-control" id="yearOfPassing" name="yearOfPassing" required)
+                button(type="submit" class="btn btn-primary") Submit  
+            //- div(class="container")
+            //-   p Experience
+      div(class="tab-pane fade show active" id="skills" role="tabpanel" aria-labelledby="skills-tab")
+        div(id="ed")
+          div(class="container")
+            h3(class="text-center") MY SKILLS DETAILS
+            table(class="table" id="educationtable")
+              thead
+                tr
+                  th INSTITUTE 
+                  th DEGREE 
+                  th YEAR OF PASSING
+                  th EDIT 
+                  th DELETE
+              tbody(id="educationbody")
+                each val, index in allEducation
+                  tr(id=`${index}`)
+                    th(class="fw-normal")= val.institute 
+                    th(class="fw-normal")= val.degree 
+                    th(class="fw-normal")= val.yearOfPassing 
+                    th(class="fw-normal") 
+                      button(type="submit" class="btn btn-primary" onclick="") Edit
+                    th(class="fw-normal")
+                      //-form(action='/delete', method='POST')
+                      button(type="submit" class="btn btn-danger" value=index onclick=`onClickDeleteEducation(${index}, ${JSON.stringify(val)})`) Delete
+                          //-
+          div(class="container")
+            div(class="jumbotron jumbotron-fluid")
+              div(class="alert alert-success")
+                h4= userName
+                p= message
+            h3(class="text-center") ADD MORE SKILLS DETAILS
+            form(action='/educationform', method='POST')
+              fieldset
+                div(class="mb-3")
+                  label(for="username" class="form-label") UserName
+                  input(type="text" class="form-control" id="username" name="username" value=userName required)
+                div(class="mb-3")
+                  label(for="institute" class="form-label") Institute
+                  input(type="text" class="form-control" id="institute" name="institute" required)
+                div(class="mb-3")
+                  label(for="degree" class="form-label") Degree
+                  input(type="text" class="form-control" id="degree" name="degree" required)
+                div(class="mb-3")
+                  label(for="yearOfPassing" class="form-label") Year Of Passing
+                  input(type="text" class="form-control" id="yearOfPassing" name="yearOfPassing" required)
+                button(type="submit" class="btn btn-primary") Submit  
+            //- div(class="container")
+            //-   p Experience
+      div(class="tab-pane fade show active" id="projects" role="tabpanel" aria-labelledby="projects-tab")
+        div(id="ed")
+          div(class="container")
+            h3(class="text-center") MY PROJECTS DETAILS
+            table(class="table" id="educationtable")
+              thead
+                tr
+                  th INSTITUTE 
+                  th DEGREE 
+                  th YEAR OF PASSING
+                  th EDIT 
+                  th DELETE
+              tbody(id="educationbody")
+                each val, index in allEducation
+                  tr(id=`${index}`)
+                    th(class="fw-normal")= val.institute 
+                    th(class="fw-normal")= val.degree 
+                    th(class="fw-normal")= val.yearOfPassing 
+                    th(class="fw-normal") 
+                      button(type="submit" class="btn btn-primary" onclick="") Edit
+                    th(class="fw-normal")
+                      //-form(action='/delete', method='POST')
+                      button(type="submit" class="btn btn-danger" value=index onclick=`onClickDeleteEducation(${index}, ${JSON.stringify(val)})`) Delete
+                          //-
+          div(class="container")
+            div(class="jumbotron jumbotron-fluid")
+              div(class="alert alert-success")
+                h4= userName
+                p= message
+            h3(class="text-center") ADD MORE PROJECTS DETAILS
+            form(action='/educationform', method='POST')
+              fieldset
+                div(class="mb-3")
+                  label(for="username" class="form-label") UserName
+                  input(type="text" class="form-control" id="username" name="username" value=userName required)
+                div(class="mb-3")
+                  label(for="institute" class="form-label") Institute
+                  input(type="text" class="form-control" id="institute" name="institute" required)
+                div(class="mb-3")
+                  label(for="degree" class="form-label") Degree
+                  input(type="text" class="form-control" id="degree" name="degree" required)
+                div(class="mb-3")
+                  label(for="yearOfPassing" class="form-label") Year Of Passing
+                  input(type="text" class="form-control" id="yearOfPassing" name="yearOfPassing" required)
+                button(type="submit" class="btn btn-primary") Submit  
+            //- div(class="container")
+            //-   p Experience
+    

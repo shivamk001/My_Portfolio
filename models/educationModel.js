@@ -1,8 +1,13 @@
-const mongoose=require('mongoose')
+import mongoose from 'mongoose'
+
 
 const educationSchema=mongoose.Schema({
-    userId,
+    userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true},
     institute: String,
-    yearOfEntry: SVGAnimatedInteger,
-    yearOfPassing: SVGAnimatedInteger
+    degree: String,
+    yearOfEntry: Number,
+    yearOfPassing: Number
 })
+
+export default mongoose.model('Education', educationSchema)
+//module.exports={Education}
